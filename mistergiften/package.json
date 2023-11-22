@@ -1,6 +1,7 @@
 {
   "name": "mistergiften",
   "version": "0.1.0",
+  "homepage": "http://Ivanuch22.github.io/mistery",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
