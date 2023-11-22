@@ -2,6 +2,7 @@ import style from "./autorization.module.scss";
 
 
 const Autorization = () => {
+    console.log("autorizations");
     return (
         <div className={style.autorization}>
             <h2 className={style.autorization__title}>Авторизація</h2>
