@@ -1,0 +1,22 @@
+.feedback {
+  &__title {
+    color: #222 !important;
+    margin-top: 40px;
+  }
+  &__slider {
+    padding-bottom: 40px !important;
+  }
+  &__slide {
+    min-width: 100%;
+    img {
+      width: 100%;
+    }
+  }
+  .swiper-pagination {
+    padding-bottom: 0px;
+  }
+  .swiper-button-prev:after,
+  .swiper-button-next:after {
+    font-size: 25px;
+  }
+}
