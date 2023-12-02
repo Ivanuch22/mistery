@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Rafaello Box",
+        "price": 349,
+        "img" : "basket/low_price.jpg"
+    },
+    {
+        "name": "Sweet and Gold Box",
+        "price": 299,
+        "img" : "basket/photo.jpg"
+    },
+    {
+        "name": "Gifter Box",
+        "price": 99,
+        "img" : "basket/logo3213_1.jpg"
+    }
+
+
+ 
+
+
+ 
+
+
+
+]
