@@ -1,0 +1,57 @@
+.feedback {
+  .swiper_button_next,
+  .swiper_button_prev {
+    position: absolute;
+    top: 45%;
+    width: 25px;
+    height: 25px;
+    z-index: 10;
+    left: 20px;
+    background-color: grey;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url("arrow-right-svgrepo-com.svg") no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+  .swiper_button_prev {
+    left: auto;
+    right: 20px;
+  }
+  .swiper_button_next {
+    transform: rotate(180deg);
+  }
+  &__title {
+    color: #222 !important;
+    margin-top: 40px;
+    font-size: 20px !important;
+    margin-top: 84px !important;
+  }
+  &__slider {
+    padding-bottom: 40px !important;
+  }
+  &__slide {
+    min-height: 50px;
+    min-width: 100%;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: 700px) {
+  .feedback {
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 3 / 2;
+
+    margin-top: 210px;
+    padding: 0 40px;
+    &__title {
+      font-size: 30px !important;
+    }
+  }
+}

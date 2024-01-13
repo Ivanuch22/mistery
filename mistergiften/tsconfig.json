@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "rootDir": "src",
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "jsx": "react",
+    "esModuleInterop": true,
+    "incremental": true,
+    "paths": {
+      "apexcharts": ["./node_modules/apexcharts-clevision"],
+      "apexcharts/*": ["./node_modules/apexcharts-clevision/*"]
+    }
+    ,
+      "experimentalDecorators": false /* or just remove the flag */
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}

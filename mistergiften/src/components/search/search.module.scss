@@ -1,0 +1,52 @@
+.block {
+  padding: 0 20px;
+  margin: 40px 0;
+  margin-top: 151px;
+}
+.inputBlock {
+  position: relative;
+}
+.input {
+  color: #000000;
+  border: 2px solid #444ad3;
+  border-radius: 20px;
+  margin: 0;
+  font-size: 100%;
+  font-size: 16px;
+  line-height: 1.33;
+  padding: 18px;
+  padding-left: 60px;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+.button {
+  color: #ffffff;
+  background-color: #444ad3;
+  border-radius: 17px;
+  text-align: center;
+  border: 0 none;
+  font-size: 16px;
+  padding: 18px 0;
+  width: 100%;
+  font-weight: 700;
+  margin: 15px 0;
+  display: block;
+}
+.img {
+  position: absolute;
+  display: block;
+  width: 25px;
+  top: 50%;
+  z-index: 234;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+@media (min-width: 700px) {
+  .block {
+    max-width: 760px;
+    margin: 0 auto;
+    margin-top: 151px;
+  }
+}
