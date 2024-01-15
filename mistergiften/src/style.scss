@@ -580,6 +580,7 @@ input[type="checkbox"] {
     font-size: 16px;
     line-height: 1.45;
   }
+
   &__wrapper {
     padding: 20px;
   }
@@ -802,6 +803,7 @@ input[type="checkbox"] {
   &__box-title {
     font-size: 12px;
     margin-top: 5px;
+    text-align: center;
   }
   &__box-checkbox {
     position: absolute;
@@ -1146,13 +1148,12 @@ input[type="checkbox"] {
       position: absolute;
       top: 50%;
       right: 11px;
-      width: 10px;
-      height: 6px;
+      width: 14px;
+      height: 15px;
       transform: translateY(-50%);
-      // background-image: url("")
-      border-top: 6px solid #000;
-      border-right: 5px solid #000;
-      border-left: 5px solid #000;
+       background-image: url("arrow-down-checkboxs.png");
+      background-size: contain;
+      background-repeat: no-repeat;
     }
   }
   &__checkBoxs_img {
@@ -2447,4 +2448,7 @@ input[type="checkbox"] {
     color: red;
     line-height: 1.2;
   }
+}
+.modal-image{
+  border-radius: 40px;
 }

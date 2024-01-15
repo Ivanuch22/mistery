@@ -26,8 +26,8 @@ const Cart: React.FC<PropTypes> = ({ onLike, cart, onAdd }) => {
         </div>
         <h3 className={style.slider__cartTitle}>{cart.name}</h3>
         <div className={style.slider__cartPrice}>
-          <span className={style.slider__cartPriceCurrent}>{cart.price}$</span>
-          <span className={style.slider__cartPriceOld}>{cart.oldPrice}$</span>
+          <span className={style.slider__cartPriceCurrent}>{cart.price}₴</span>
+          <span className={style.slider__cartPriceOld}>{cart.oldPrice}₴</span>
         </div>
         <button
           aria-label="Додати цей товар до кошика"

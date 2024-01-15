@@ -1,6 +1,7 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
 import DrawerCart from "../drawerCart";
 import { Link } from "react-router-dom";
+import * as process from "process";
 interface PropsType {
   isLikeOpen?: boolean | undefined;
   setOpenLike?: (status: boolean) => void;
@@ -122,6 +123,16 @@ const Basket: React.FC<PropsType> = ({
   }, []);
   useEffect(() => {
     console.log(carts);
+    console.log(basketBox);
+
+    if(carts?.length ===0){
+      setBasketBox(basketBox.map((element:any)=>{
+        return {...element, isActive: false}
+      }));
+      setBoxsPriceBasket(0)
+      console.log(basketBox)
+
+    }
   }, [carts]);
   const testApiNovaPoshta = async (value: string) => {
     const url = "https://api.novaposhta.ua/v2.0/json/";
@@ -204,7 +215,7 @@ const Basket: React.FC<PropsType> = ({
       case "phoneNumber":
         value = handleInputChange(value);
         value.length === 13 ? (isValid = true) : (isValid = false);
-        errorMessage = isValid ? "" : "Ведіть правильно номер телефону";
+        errorMessage = isValid ? "" : "Введіть правильно номер телефону";
         break;
       case "city":
         value.length > 2 ? (isValid = true) : (isValid = false);
@@ -320,7 +331,7 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
         price: element.price, // Замініть на значення з форми або іншого джерела
         quantity: element.count,
         name: element.name, // Замініть на значення з форми або іншого джерела
-        picture: `https://kalynych.fun/img/${element.images[0]}`, // Замініть на значення з форми або іншого джерела
+        picture: `https://mister-gifter.com/img/${element.images[0]}`, // Замініть на значення з форми або іншого джерела
         properties:
           activeType.length > 0
             ? [
@@ -346,7 +357,7 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
         price: actBox.price, // Замініть на значення з форми або іншого джерела
         quantity: 1,
         name: actBox.name, // Замініть на значення з форми або іншого джерела
-        picture: `https://kalynych.fun/img/${actBox.img}`, // Замініть на значення з форми або іншого джерела
+        picture: `https://mister-gifter.com/img/${actBox.img}`, // Замініть на значення з форми або іншого джерела
         properties: [],
       });
     } catch {
@@ -369,7 +380,7 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
     };
 
     fetch(
-      `https://dry-wildwood-96930-d95ea0cd167f.herokuapp.com/send-to-keycrm`,
+      `https://mistery-server.onrender.com/send-to-keycrm`,
       {
         method: "POST",
         headers: {
@@ -439,7 +450,7 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
           name: cart.name,
           qty: cart.count,
           sum: cart.price * 100,
-          icon: `https://kalynych.fun/img/${cart.images[0]}`,
+          icon: `${process.env.PUBLIC_SITE_URL}/img/${cart.images[0]}`,
           unit: "шт.",
           barcode: "string",
           header: "string",
@@ -471,7 +482,7 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
           name: element.name,
           qty: 1,
           sum: element.price * 100,
-          icon: `https://kalynych.fun/img/${element.img}}`,
+          icon: `https://mister-gifter.com/img/${element.img}}`,
           unit: "шт.",
           barcode: "string",
           header: "string",
@@ -491,8 +502,8 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
       },
       body: JSON.stringify({
         amount: price * 100,
-        redirectUrl: "http://kalynych.fun",
-        webHookUrl: `https://dry-wildwood-96930-d95ea0cd167f.herokuapp.com/webhook`,
+        redirectUrl: "https://mister-gifter.com/",
+        webHookUrl: `https://mistery-server.onrender.com/webhook`,
         merchantPaymInfo: {
           reference: `${id}_84d0070ee4e44667b31371d8f8813947`,
           destination: "Подарунок від MISTER GIFTER",
@@ -778,6 +789,7 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
                     className="drawer__label-input"
                     type="radio"
                     name="connection"
+                    defaultChecked
                     tabIndex={6}
                     value="viber"
                     onClick={(e: any) => setInputMessenger(e.target.value)}
@@ -792,7 +804,6 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
                     onClick={(e: any) => setInputMessenger(e.target.value)}
                     value="telegram"
                     name="connection"
-                    defaultChecked
                   />
                   <h5 className="drawer__label-title">Telegram</h5>
                 </label>

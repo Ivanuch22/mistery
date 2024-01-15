@@ -292,8 +292,14 @@ const App = () => {
         );
   };
   const removeAdd = (cart: any) => {
-    setAddedCarts((prevData: any) =>
-      prevData.filter((element: any) => element.type !== cart.type)
+    setAddedCarts((prevData: any) =>{
+      const newArr = prevData.filter((element: any) => element.type !== cart.type);
+      if(newArr.length === 0){
+        console.log("lsdalj")
+      }
+      return newArr;
+        }
+
     );
   };
   const changeType = (type: any, cart: any) => {
