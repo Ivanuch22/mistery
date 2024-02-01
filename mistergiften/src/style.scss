@@ -1071,6 +1071,8 @@ input[type="checkbox"] {
   }
   &__slide {
     min-height: 200px;
+    border-radius: 30px;
+    overflow: hidden;
   }
   .swiper-button-prev,
   .swiper-button-next {
@@ -1111,6 +1113,8 @@ input[type="checkbox"] {
   &__row {
     display: flex;
     padding: 0 20px;
+    margin-bottom: 9px;
+    align-items: center;
   }
   &__price {
     color: #f00;
@@ -1118,11 +1122,11 @@ input[type="checkbox"] {
     font-style: normal;
     font-weight: 600;
     line-height: 21.6px;
-    margin-bottom: 9px;
   }
   &__oldPrice {
+    text-decoration: line-through;
     color: #bdbdbd;
-    font-size: 16px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 600;
     line-height: 21.6px;
@@ -1151,7 +1155,7 @@ input[type="checkbox"] {
       width: 14px;
       height: 15px;
       transform: translateY(-50%);
-       background-image: url("arrow-down-checkboxs.png");
+      background-image: url("arrow-down-checkboxs.png");
       background-size: contain;
       background-repeat: no-repeat;
     }
@@ -1220,12 +1224,10 @@ input[type="checkbox"] {
     padding: 15px 12px;
     justify-content: center;
     align-items: center;
+    margin-bottom: 29px;
     border: 1px solid #e4e4e4;
     background-color: transparent;
-    // img {
-    //   width: 25px;
-    //   height: 22px;
-    // }
+
     svg {
       width: 50%;
       transform: scale(1);
@@ -1253,6 +1255,7 @@ input[type="checkbox"] {
       stroke: red;
     }
   }
+
   &__text {
     padding: 0 20px;
     color: #000;
@@ -1279,6 +1282,7 @@ input[type="checkbox"] {
   }
   &__orderedImg {
     display: block;
+    border-radius: 20px;
     width: 100%;
     height: auto;
   }
@@ -2077,11 +2081,15 @@ input[type="checkbox"] {
     font-size: 24px;
     line-height: 1.35;
   }
-  .CartPage__price,
   .CartPage__oldPrice {
     font-size: 20px;
     line-height: 1.35;
   }
+  .CartPage__price {
+    font-size: 17px;
+    line-height: 1.35;
+  }
+
   .modal-image {
     width: auto;
   }
@@ -2449,6 +2457,6 @@ input[type="checkbox"] {
     line-height: 1.2;
   }
 }
-.modal-image{
+.modal-image {
   border-radius: 40px;
 }

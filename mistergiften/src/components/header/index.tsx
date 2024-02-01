@@ -24,6 +24,8 @@ interface header {
   setAddedCarts: any;
   classLikeText: any;
   removeAllAdded: any;
+  isShowMessage: any;
+  setShowMessage: any;
 }
 interface Like {
   likedCart: any;
@@ -178,6 +180,8 @@ const Header: React.FC<header> = ({
   removeAdd,
   classLikeText,
   onLike,
+                                    isShowMessage,
+                                    setShowMessage,
   likedCart,
   addedCart,
   decrement,
@@ -282,6 +286,8 @@ const Header: React.FC<header> = ({
         setOpenLike={setOpenLike}
       />
       <Basket
+          isShowMessage={isShowMessage}
+          setShowMessage={ setShowMessage}
         removeAllAdded={removeAllAdded}
         price={price}
         setBoxsPriceBasket={setBoxsPriceBasket}

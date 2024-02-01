@@ -11,19 +11,12 @@
         "img" : "basket/photo.webp",
         "isActive": false
     },
+    
     {
-        "name": "Gifter Box",
-        "price": 99,
-        "img" : "basket/logo3213_1.webp",
+        "name": "Sweet and Gold Box",
+        "price": 299,
+        "img" : "basket/photo.webp",
         "isActive": false
     }
-
-
- 
-
-
- 
-
-
 
 ]

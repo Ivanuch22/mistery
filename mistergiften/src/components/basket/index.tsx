@@ -18,6 +18,8 @@ interface PropsType {
   price: number;
   boxsPriceBasket: any;
   removeAllAdded: any;
+  isShowMessage: boolean;
+  setShowMessage: any;
 }
 
 interface array {
@@ -60,6 +62,8 @@ interface ActiveCity {
 }
 
 const Basket: React.FC<PropsType> = ({
+  isShowMessage,
+  setShowMessage,
   removeAllAdded,
   removeAdd,
   decrement,
@@ -76,7 +80,6 @@ const Basket: React.FC<PropsType> = ({
   const [inputMessenger, setInputMessenger] = useState("viber");
   const [inputPayment, setInputPayment] = useState("monopay");
   const [isValid, setIsValid] = useState<boolean>(true);
-  const [isShowMessage, setShowMessage] = useState(false);
 
   const [listCityes, setListCityes] = useState([]);
   const [novaDepartment, setNovaDepartment] = useState([]);
@@ -125,13 +128,14 @@ const Basket: React.FC<PropsType> = ({
     console.log(carts);
     console.log(basketBox);
 
-    if(carts?.length ===0){
-      setBasketBox(basketBox.map((element:any)=>{
-        return {...element, isActive: false}
-      }));
-      setBoxsPriceBasket(0)
-      console.log(basketBox)
-
+    if (carts?.length === 0) {
+      setBasketBox(
+        basketBox.map((element: any) => {
+          return { ...element, isActive: false };
+        })
+      );
+      setBoxsPriceBasket(0);
+      console.log(basketBox);
     }
   }, [carts]);
   const testApiNovaPoshta = async (value: string) => {
@@ -259,8 +263,8 @@ const Basket: React.FC<PropsType> = ({
   };
 
   const sendMessageToTelegram = async (data: any) => {
-    const TOKEN = "6619280299:AAGIL6f6uD5nOU1Sjw26zzqvyI0V_fZZKq0";
-    const CHAT_ID = "-1002007095666";
+    const TOKEN = "6918022465:AAH9WG4sUu7rOOZAWv2vVOZD33VqcAMXEng";
+    const CHAT_ID = "-1001996993708";
     const URL_API = `https://api.telegram.org/bot${TOKEN}`;
 
     let message = `<b>Заявка з сайта! </b>
@@ -349,16 +353,18 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
           return element.price === boxsPriceBasket;
         });
       };
-      const actBox: array = activeBoxBasket()[0];
+      const actBox = activeBoxBasket();
 
       console.log(actBox.img);
       console.log(actBox.img);
-      filterCarts.push({
-        price: actBox.price, // Замініть на значення з форми або іншого джерела
-        quantity: 1,
-        name: actBox.name, // Замініть на значення з форми або іншого джерела
-        picture: `https://mister-gifter.com/img/${actBox.img}`, // Замініть на значення з форми або іншого джерела
-        properties: [],
+      actBox.map((boxs: any) => {
+        filterCarts.push({
+          price: boxs.price,
+          quantity: 1,
+          name: boxs.name,
+          picture: "https://mister-gifter.com/img/" + boxs.img,
+          properties: [],
+        });
       });
     } catch {
       console.log("basket is not choose");
@@ -379,19 +385,16 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
       products: filterCarts,
     };
 
-    fetch(
-      `https://mistery-server.onrender.com/send-to-keycrm`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Cache-Control": "no-cache",
-          Pragma: "no-cache",
-        },
-        body: JSON.stringify(dataForBack),
-      }
-    )
+    fetch(`https://server.mister-gifter.com/send-to-keycrm`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache",
+      },
+      body: JSON.stringify(dataForBack),
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -450,20 +453,14 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
           name: cart.name,
           qty: cart.count,
           sum: cart.price * 100,
-          icon: `${process.env.PUBLIC_SITE_URL}/img/${cart.images[0]}`,
+          icon: `https://mister-gifter.com/img/${cart.images[0]}`,
           unit: "шт.",
-          barcode: "string",
-          header: "string",
-          footer: "string",
-          tax: [],
-          uktzed: "string",
-          discounts: [
-            {
-              type: "DISCOUNT",
-              mode: "VALUE",
-              value: cart.oldPrice,
-            },
-          ],
+          barcode: "st12312309ring",
+          header: "header",
+          code: `code_${cart.name}`,
+          footer: "footer",
+          tax: [0],
+          uktzed: "uktzedcode",
         };
       }
     );
@@ -482,13 +479,14 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
           name: element.name,
           qty: 1,
           sum: element.price * 100,
-          icon: `https://mister-gifter.com/img/${element.img}}`,
+          icon: `https://mister-gifter.com/img/${element.img}`,
           unit: "шт.",
-          barcode: "string",
-          header: "string",
-          footer: "string",
-          tax: [],
-          uktzed: "string",
+          barcode: "asdlk23123",
+          header: "header",
+          code: `code_${element.name}`,
+          footer: "footer",
+          tax: [0],
+          uktzed: "uktzedcode",
         });
       });
     } catch {
@@ -498,23 +496,21 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Token": "utR_bnF6LUzdc4pr3yFNFF2kKEPk75xeIlItZx9QfaxY",
+        "X-Token": "mYlS_qmZcB1R6h3F6d0Omeg",
       },
       body: JSON.stringify({
         amount: price * 100,
-        redirectUrl: "https://mister-gifter.com/",
-        webHookUrl: `https://mistery-server.onrender.com/webhook`,
+        ccy: 980,
+        redirectUrl: "https://mister-gifter.com/?success=true",
+        webHookUrl: `https://server.mister-gifter.com/webhook`,
         merchantPaymInfo: {
           reference: `${id}_84d0070ee4e44667b31371d8f8813947`,
           destination: "Подарунок від MISTER GIFTER",
           comment: "Подарунок від MISTER GIFTER",
-          customerEmails: [
-            "ivan.kalunuch12@gmail.com",
-            "ivan.kalunuch31@gmail.com",
-          ],
-          paymentType: "debit",
           basketOrder: dataAboutCartForMono,
         },
+        paymentType: "debit",
+        validity: 3600,
       }),
     })
       .then((response) => {
@@ -810,7 +806,7 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
                 <h4 className="drawer__text">Спосіб оплати</h4>
                 <label className="drawer__label">
                   <input
-                    onClick={(e: any) => setInputPayment(e.target.value)}
+                    onChange={(e: any) => setInputPayment(e.target.value)}
                     defaultChecked
                     className="drawer__label-input"
                     type="radio"
@@ -825,7 +821,7 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
                 <label className="drawer__label">
                   <input
                     className="drawer__label-input"
-                    onClick={(e: any) => setInputPayment(e.target.value)}
+                    onChange={(e: any) => setInputPayment(e.target.value)}
                     tabIndex={9}
                     type="radio"
                     name="pay"
@@ -872,7 +868,7 @@ ${boxsPriceBasket > 0 ? boxsPriceBasket : "Бокс не був вибраний
         <ModalMessage
           setShowMessage={setShowMessage}
           closeMenu={closeMenu}
-          status="f"
+          status="false"
         />
       )}
     </>

@@ -19,6 +19,7 @@ import SendSRM from "./pages/SendSRM";
 import Oferta from "./pages/Oferta";
 import PrivacyPolicy from "./pages/privacyPolicy";
 import CustomPage from "./pages/CustomPage";
+import path from "path";
 
 const App = () => {
   const [likedCart, setLikeCarts] = useState<any[]>([]);
@@ -31,6 +32,7 @@ const App = () => {
   const [popular, setPopular] = useState<any>([]);
   const [classLikeText, setLikeClassText] = useState("");
   const [loading, setLoading] = useState(true);
+  const [isShowMessage, setShowMessage] = useState(false);
 
   const currentLocation = useLocation();
 
@@ -42,6 +44,13 @@ const App = () => {
   useEffect(() => {
     getAllData();
   }, []);
+  useEffect(() => {
+    const currentUrl = window.location.href;
+    const urlParams = new URLSearchParams(new URL(currentUrl).search);
+    if (urlParams.get("success") === "true") {
+      setShowMessage(true);
+    }
+  }, [setShowMessage]);
   useEffect(() => {
     const withPhotoFilter = data.filter(
       (element: any) => element.category === "Category 4"
@@ -101,7 +110,15 @@ const App = () => {
 
       // Додайте інші роути за необхідністю
       default:
-        return "Mister Giften";
+        const id = pathname.slice(1);
+        setTimeout(() => {
+          const element = data.filter((cart: any) => cart.id == +id);
+          if (element.length > 0) {
+            return "Mister Gifter - " + element[0].name;
+          }
+          return "Mister Gifter";
+        }, 100);
+        return "Mister Gifter";
     }
   };
 
@@ -112,6 +129,7 @@ const App = () => {
       "chameleons.json",
       "cupsWithPhotos.json",
       "mostPopularCarts.json",
+      "ofer.json",
     ];
 
     const fetchData: any = async (fileName: string) => {
@@ -292,15 +310,15 @@ const App = () => {
         );
   };
   const removeAdd = (cart: any) => {
-    setAddedCarts((prevData: any) =>{
-      const newArr = prevData.filter((element: any) => element.type !== cart.type);
-      if(newArr.length === 0){
-        console.log("lsdalj")
+    setAddedCarts((prevData: any) => {
+      const newArr = prevData.filter(
+        (element: any) => element.type !== cart.type
+      );
+      if (newArr.length === 0) {
+        console.log("lsdalj");
       }
       return newArr;
-        }
-
-    );
+    });
   };
   const changeType = (type: any, cart: any) => {
     const newType = { ...type, isActive: true };
@@ -338,6 +356,8 @@ const App = () => {
         onLike={onLike}
         addedCart={addedCart}
         likedCart={likedCart}
+        isShowMessage={isShowMessage}
+        setShowMessage={setShowMessage}
       />
       <Routes>
         <Route
@@ -355,6 +375,18 @@ const App = () => {
         />
         <Route
           path="/:id"
+          element={
+            <CartPage
+              changeType={changeType}
+              loading={loading}
+              onAdd={onAdd}
+              cards={data}
+              onLike={onLike}
+            />
+          }
+        />
+        <Route
+          path="/ofer/:id"
           element={
             <CartPage
               changeType={changeType}

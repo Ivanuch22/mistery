@@ -21,7 +21,6 @@ const PageTemplate: React.FC<PropsType> = ({
   carts,
   onAdd,
   onLike,
-
   isShowLables,
   isShowText,
   isShowCarts,

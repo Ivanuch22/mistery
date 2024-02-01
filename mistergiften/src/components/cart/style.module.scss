@@ -46,6 +46,7 @@
   &__cartPrice {
     font-size: 14px;
     justify-content: center;
+    align-items: center;
     display: flex;
   }
   &__cartPriceCurrent {
@@ -53,6 +54,8 @@
     margin-right: 7px;
   }
   &__cartPriceOld {
+    font-size: 16px;
+
     color: #bdbdbd;
     text-decoration: line-through;
   }
